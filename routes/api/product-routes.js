@@ -77,23 +77,17 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   // update product data
   try {
-    const product = await Product.findByPk(req.params.id);
-
-    if (req.body?.tagIds?.length) {
-      await product.setTags(req.body.tagIds);
+    const productData = await Product.update(req.body, {
+      where: {
+        id: req.params.id
+      }
+    });
+    if (!productData[0]) {
+      res.status(404).json({ message: 'No product found with this id!' });
+      return;
     }
-
-    await product.update(req.body);
-    await product.save();
-
-    const productWithTags = await Product.findByPk(
-      product.id,
-      { include: [Tag] },
-    );
-
-    return res.status(200).json(productWithTags);
+    res.status(200).json({ message: 'Product updated successfully!' });
   } catch (err) {
-    console.log(err);
     res.status(500).json(err);
   }
 });
@@ -110,7 +104,7 @@ router.delete("/:id", async (req, res) => {
       res.status(404).json({ message: 'No product found with this id!' });
       return;
     }
-    res.status(200).json(productData);
+    res.status(200).json({ message: 'Product deleted successfully!' });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
