@@ -1,6 +1,6 @@
 # E-Commerce Back End
 
-This E-Commerce Back End application was created using the latest technologies. Using the latest technologies will allow an internet retail company compete with other e-commerce companies.
+This E-Commerce Back End application was created using the latest technologies. Using the latest technologies will allow an internet retail company to compete with other e-commerce companies in the marker.
 
 ## Description
 
